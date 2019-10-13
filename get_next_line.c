@@ -1,14 +1,42 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/13 14:29:14 by trbonnes          #+#    #+#             */
+/*   Updated: 2019/10/13 14:29:14 by trbonnes         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 #include <stdio.h>
 
-int get_next_line(int fd, char **line)
+int	ft_buffline(char *buffer)
+{
+	int i;
+
+	i = 0;
+	while (buffer[i])
+	{
+		if (buffer[i] == '\n' || buffer[i] == '\0')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+int	get_next_line(int fd, char **line)
 {
 	char			*lect;
 	char			*buffer;
 	static char		*save;
 	int				nb_o;
+	int				i;
 
 	lect = *line;
+	i = 0;
 	if (!(buffer = malloc(BUFFER_SIZE)))
 		return (-1);
 	if (!save)
@@ -27,26 +55,43 @@ int get_next_line(int fd, char **line)
 			free(save);
 		return (-1);
 	}
-	while (*buffer != '\n')
-	{
-		while (*save != '\n' && *save != '\0')
+	//if (ft_buffline(buffer) == 1)
+		while (*buffer != '\n')
 		{
-			printf("appel\n");
-			printf(" save : %s\n", save);
-			*lect = *save;
-			lect++;
-			save++;
-			printf("seg\n");
-			if (*save == '\n' || *save== '\0')
+			while (*save != '\n' && *save != '\0')
 			{
+				*lect = *save;
+				lect++;
 				save++;
-				return (1);
+				if (*save == '\n' || *save== '\0')
+				{
+					save++;
+					return (1);
+				}
 			}
+			*lect = *buffer;
+			lect++;
+			buffer++;
 		}
-		*lect = *buffer;
-		lect++;
-		buffer++;
-	}
+	//else
+		//while (buffer[i] != '\n')
+		//{
+		//	i = 0;
+		//	while (buffer[i])
+		//	{
+		//		*lect = buffer[i];
+		//		i++;
+		//		lect++;
+		//	}
+		//	nb_o = read(fd, buffer, BUFFER_SIZE);
+		//	if (nb_o == -1)
+		//	{
+		//		free(buffer);
+		//		if (save != NULL)
+		//		free(save);
+		//		return (-1);
+		//	}
+		//}
 	free(save);
 	save = buffer;
 	save++;
