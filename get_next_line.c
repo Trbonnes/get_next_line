@@ -18,7 +18,7 @@ int	ft_buffline(char *buffer)
 	int i;
 
 	i = 0;
-	while (buffer[i])
+	while (i <= BUFFER_SIZE)
 	{
 		if (buffer[i] == '\n' || buffer[i] == '\0')
 			return (1);
@@ -55,7 +55,7 @@ int	get_next_line(int fd, char **line)
 			free(save);
 		return (-1);
 	}
-	//if (ft_buffline(buffer) == 1)
+	if (ft_buffline(buffer) == 1)
 		while (*buffer != '\n')
 		{
 			while (*save != '\n' && *save != '\0')
@@ -73,25 +73,25 @@ int	get_next_line(int fd, char **line)
 			lect++;
 			buffer++;
 		}
-	//else
-		//while (buffer[i] != '\n')
-		//{
-		//	i = 0;
-		//	while (buffer[i])
-		//	{
-		//		*lect = buffer[i];
-		//		i++;
-		//		lect++;
-		//	}
-		//	nb_o = read(fd, buffer, BUFFER_SIZE);
-		//	if (nb_o == -1)
-		//	{
-		//		free(buffer);
-		//		if (save != NULL)
-		//		free(save);
-		//		return (-1);
-		//	}
-		//}
+	else
+		while (buffer[i] != '\n')
+		{
+			i = 0;
+			while (buffer[i])
+			{
+				*lect = buffer[i];
+				i++;
+				lect++;
+			}
+			nb_o = read(fd, buffer, BUFFER_SIZE);
+			if (nb_o == -1)
+			{
+				free(buffer);
+				if (save != NULL)
+				free(save);
+				return (-1);
+			}
+		}
 	free(save);
 	save = buffer;
 	save++;
