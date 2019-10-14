@@ -18,5 +18,6 @@
 # include <stdlib.h>
 
 int	get_next_line(int fd, char **line);
+int	ft_buffline(char *buffer);
 
 #endif

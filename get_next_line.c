@@ -18,7 +18,6 @@ int	ft_buffline(char *buffer)
 	int i;
 
 	i = 0;
-	printf("buffline\n");
 	while (i < BUFFER_SIZE)
 	{
 		if (buffer[i] == '\n' || buffer[i] == '\0')
@@ -47,8 +46,7 @@ int	get_next_line(int fd, char **line)
 		*save = '\0';
 	}
 	nb_o = read(fd, buffer, BUFFER_SIZE);
-	printf("nb_o : %d\n", nb_o);
-	printf("buffer: %s\n", buffer);
+	printf("buffer: \"%s\"\n", buffer);
 	if (nb_o == -1)
 	{
 		free(buffer);
@@ -57,22 +55,28 @@ int	get_next_line(int fd, char **line)
 		return (-1);
 	}
 	printf("buffline result : %d\n", ft_buffline(buffer));
+	printf("save : \"%s\"\n", save);
 	if (ft_buffline(buffer) == 1)
 		while (*buffer != '\n')
 		{
-			printf("seg1\n");
 			while (*save != '\n' && *save != '\0')
 			{
 				*lect = *save;
 				lect++;
 				save++;
-				if (*save == '\n' || *save == '\0')
+				if (*save == '\n')
 				{
 					save++;
 					*lect = '\0';
 					return (1);
 				}
 			}
+			if (*buffer == '\0')
+				{
+					*lect = '\0';
+					printf("r\n");
+					return (0);
+				}
 			*lect = *buffer;
 			lect++;
 			buffer++;
@@ -81,8 +85,15 @@ int	get_next_line(int fd, char **line)
 		while (*lect != '\n')
 		{
 			i = 0;
-			//printf("seg2\n");
-			while (buffer[i] && buffer[i] != '\n')
+			printf("save : \"%s\"\n", save);
+			while (*save && *save != '\n' && nb_o != 0)
+			{
+				*lect = *save;
+				save++;
+				lect++;
+			}
+			printf("lect: \"%s\"\n", lect);
+			while (buffer[i] && buffer[i] != '\n' && nb_o != 0)
 			{
 				*lect = buffer[i];
 				i++;
@@ -91,26 +102,29 @@ int	get_next_line(int fd, char **line)
 			if (buffer[i] == '\n' || nb_o == 0)
 				*lect = '\n';
 			else if (nb_o != 0)
+			{
+				i = 0;
+				while (buffer[i])
+					buffer[i++] = 0;
 				nb_o = read(fd, buffer, BUFFER_SIZE);
-			//printf("buffer: %s\n", buffer);
-			printf("lect: %s\n", lect);
-			//printf("nb_o: %d\n", nb_o);
+			}
+			printf("buffer: \"%s\"\n", buffer);
 			if (nb_o == -1)
 			{
 				free(buffer);
 				if (save != NULL)
-				free(save);
+					free(save);
 				return (-1);
 			}
 		}
-	//free(save);
-	save = buffer;
+	printf("buffer: \"%s\"\n", buffer);
+	save = buffer + i;
 	save++;
+	printf("save return: \"%s\"\n", save);
 	*lect = '\0';
 	if (nb_o == 0)
 	{
 		free(buffer);
-		free(save);
 		return (0);
 	}
 	return (1);
