@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/13 14:29:14 by trbonnes          #+#    #+#             */
-/*   Updated: 2019/10/13 14:29:14 by trbonnes         ###   ########.fr       */
+/*   Created: 2019/10/14 11:53:22 by trbonnes          #+#    #+#             */
+/*   Updated: 2019/10/14 11:54:14 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	get_next_line(int fd, char **line)
 
 	lect = *line;
 	i = 0;
+	printf("size: %d\n", BUFFER_SIZE);
 	if (!(buffer = malloc(BUFFER_SIZE)))
 		return (-1);
 	if (!save)
@@ -45,6 +46,7 @@ int	get_next_line(int fd, char **line)
 			return (-1);
 		*save = '\0';
 	}
+	printf("buffer: \"%s\"\n", buffer);
 	nb_o = read(fd, buffer, BUFFER_SIZE);
 	printf("buffer: \"%s\"\n", buffer);
 	if (nb_o == -1)
@@ -72,11 +74,11 @@ int	get_next_line(int fd, char **line)
 				}
 			}
 			if (*buffer == '\0')
-				{
-					*lect = '\0';
-					printf("r\n");
-					return (0);
-				}
+			{
+				*lect = '\0';
+				printf("r\n");
+				return (0);
+			}
 			*lect = *buffer;
 			lect++;
 			buffer++;
