@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 11:53:22 by trbonnes          #+#    #+#             */
-/*   Updated: 2019/10/15 09:36:11 by trbonnes         ###   ########.fr       */
+/*   Updated: 2019/10/15 12:31:07 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ int		ft_bigone(char **buffer, char **save, char **lect, int nb_r)
 			**lect = '\0';
 			return (0);
 		}
+		if (**lect == '\0')
+			ft_lectalloc(lect);
 		**lect = **buffer;
 		(*lect)++;
 		(*buffer)++;
@@ -97,7 +99,10 @@ int		get_next_line(int fd, char **line)
 	static char		*save;
 	int				nb_r;
 
-	lect = *line;
+	*line = NULL; 
+	lect = NULL;
+	if (ft_lectalloc(&lect) == -1)
+		return (-1);
 	if (!(buffer = malloc(BUFFER_SIZE)))
 		return (-1);
 	if (save_lock(&save) == -1)
@@ -107,7 +112,9 @@ int		get_next_line(int fd, char **line)
 		return (-1);
 	if (ft_buffline(buffer) == 1)
 	{
-		if (ft_bigone(&buffer, &save, &lect, nb_r) == 1)
+		nb_r = ft_bigone(&buffer, &save, &lect, nb_r);
+		*line = lect;
+		if (nb_r == 1)
 			return (1);
 		return (0);
 	}
