@@ -6,14 +6,14 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 12:11:47 by trbonnes          #+#    #+#             */
-/*   Updated: 2019/10/14 15:23:47 by trbonnes         ###   ########.fr       */
+/*   Updated: 2019/10/15 08:28:02 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <stdio.h>
 
-int ft_error(int nb_r, char *buffer, char *save)
+int	ft_error(int nb_r, char *buffer, char *save)
 {
 	if (nb_r == -1)
 	{
@@ -61,10 +61,12 @@ int	ft_bigone(char **buffer, char **save, char **lect, int nb_r)
 	return (1);
 }
 
-int ft_littleone(char **buffer, char **save, char **lect, int nb_r, int fd)
+int	ft_littleone(char **buffer, char **save, char **lect, int fd)
 {
 	int i;
+	int nb_r;
 
+	nb_r = 1;
 	while (**lect != '\n')
 	{
 		i = 0;
@@ -74,9 +76,9 @@ int ft_littleone(char **buffer, char **save, char **lect, int nb_r, int fd)
 			(*save)++;
 			(*lect)++;
 		}
-		while ((*buffer)[i] && (*buffer[i]) != '\n' && nb_r != 0)
+		while (((*buffer)[i]) && ((*buffer)[i]) != '\n' && nb_r != 0)
 		{
-			**lect = (*buffer)[i];
+			**lect = ((*buffer)[i]);
 			i++;
 			(*lect)++;
 		}
@@ -96,9 +98,6 @@ int ft_littleone(char **buffer, char **save, char **lect, int nb_r, int fd)
 	(*save)++;
 	**lect = '\0';
 	if (nb_r == 0)
-	{
-		//free(buffer);
 		return (0);
-	}
 	return (1);
 }

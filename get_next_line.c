@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 11:53:22 by trbonnes          #+#    #+#             */
-/*   Updated: 2019/10/14 15:16:16 by trbonnes         ###   ########.fr       */
+/*   Updated: 2019/10/15 08:28:56 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,80 +47,28 @@ int	get_next_line(int fd, char **line)
 	nb_r = read(fd, buffer, BUFFER_SIZE);
 	if (ft_error(nb_r, buffer, save) == -1)
 		return (-1);
+	printf("buffline : %d\n", ft_buffline(buffer));
 	if (ft_buffline(buffer) == 1)
 	{
-		if(ft_bigone(&buffer, &save, &lect, nb_r) == 1)
+		if (ft_bigone(&buffer, &save, &lect, nb_r) == 1)
 			return (1);
 		else
 			return (0);
 	}
-//		while (*buffer != '\n')
-//		{
-//			while (*save != '\n' && *save != '\0')
-//			{
-//				*lect = *save;
-//				lect++;
-//				save++;
-//				if (*save == '\n')
-//				{
-//					save++;
-//					*lect = '\0';
-//					return (1);
-//				}
-//			}
-//			if (*buffer == '\0')
-//			{
-//				*lect = '\0';
-//				return (0);
-//			}
-//			*lect = *buffer;
-//			lect++;
-//			buffer++;
-//		}
 	else
 	{
-		r = ft_littleone(&buffer, &save, &lect, nb_r, fd);
-		if(r == 1)
+		r = ft_littleone(&buffer, &save, &lect, fd);
+		if (r == 1)
 			return (1);
 		else if (r == -1)
+		{
+			free(buffer);
 			return (-1);
+		}
 		else
+		{
+			free(buffer);
 			return (0);
+		}
 	}
-//		while (*lect != '\n')
-//		{
-//			i = 0;
-//			while (*save && *save != '\n' && nb_r != 0)
-//			{
-//				*lect = *save;
-//				save++;
-//				lect++;
-//			}
-//			while (buffer[i] && buffer[i] != '\n' && nb_r != 0)
-//			{
-//				*lect = buffer[i];
-//				i++;
-//				lect++;
-//			}
-//			if (buffer[i] == '\n' || nb_r == 0)
-//				*lect = '\n';
-//			else if (nb_r != 0)
-//			{
-//				i = 0;
-//				while (buffer[i])
-//					buffer[i++] = 0;
-//				nb_r = read(fd, buffer, BUFFER_SIZE);
-//			}
-//			if (ft_error(nb_r, buffer, save) == -1)
-//				return (-1);
-//		}
-//	save = buffer + i;
-//	save++;
-//	*lect = '\0';
-//	if (nb_r == 0)
-//	{
-//		free(buffer);
-//		return (0);
-//	}
-//	return (1);
 }
