@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 11:53:22 by trbonnes          #+#    #+#             */
-/*   Updated: 2019/10/16 10:45:47 by marvin           ###   ########.fr       */
+/*   Updated: 2019/10/16 12:00:59 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,14 @@ int		ft_bigone(char **buffer, char **save, char **lect, int nb_r)
 
 	i = 0;
 	j = 0;
+	printf("overflow?\n");
 	while (buffer[0][i] != '\n')
 	{
+		printf("overflow??\n");
 		if (ft_bigsave(save, lect) == 1)
 			return (1);
-		while (lect[0][j])
+		printf("overflow???\n");
+		while (lect[0][j] != '\0')
 				j++;
 		if (buffer[0][i] == '\0')
 		{
@@ -57,6 +60,14 @@ int		ft_bigone(char **buffer, char **save, char **lect, int nb_r)
 			return (0);
 		}
 		lect[0][j++] = buffer[0][i++];
+		printf("overflow????\n");
+		if (lect[0][j] == '\0')
+		{
+			printf("?\n");
+			if (ft_lectalloc(lect) == -1)
+				return (-1);
+		}
+		printf("overflow?????\n");
 	}
 	*save = *buffer + i + 1;
 	lect[0][j] = '\0';
@@ -96,12 +107,15 @@ int		ft_littleone(char **buffer, char **save, char **lect, int fd)
 
 int		get_next_line(int fd, char **line)
 {
-	char			*lect;
 	char			*buffer;
 	static char		*save;
 	int				nb_r;
 
-	lect = *line;
+	line = 0;
+	if (!(line = malloc(sizeof(char*))))
+		return (-1);
+	if (ft_firstalloc(line) == -1)
+		return (-1);
 	if (!(buffer = malloc(BUFFER_SIZE)))
 		return (-1);
 	if (save_lock(&save) == -1)
@@ -112,11 +126,11 @@ int		get_next_line(int fd, char **line)
 	printf("buffline: %d\n", ft_buffline(buffer));
 	if (ft_buffline(buffer) == 1)
 	{
-		if (ft_bigone(&buffer, &save, &lect, nb_r) == 1)
+		if (ft_bigone(&buffer, &save, line, nb_r) == 1)
 			return (1);
 		return (0);
 	}
-	nb_r = ft_littleone(&buffer, &save, &lect, fd);
+	nb_r = ft_littleone(&buffer, &save, line, fd);
 	if (nb_r == 1)
 		return (1);
 	else if (nb_r == -1)
