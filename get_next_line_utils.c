@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 12:11:47 by trbonnes          #+#    #+#             */
-/*   Updated: 2019/10/16 11:43:37 by marvin           ###   ########.fr       */
+/*   Updated: 2019/10/16 16:05:54 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int		ft_firstalloc(char **lect)
 	if (!(lect[0] = malloc(BUFFER_SIZE + 2)))
 		return (-1);
 	lect[0][BUFFER_SIZE + 1] = '\0';
+	printf("address: %p\n", lect);
 	return (0);
 }
 
@@ -45,6 +46,7 @@ int		ft_lectalloc(char **lect)
 	while (tmp[++j] != '\0')
 		lect[0][j] = tmp[j];
 	lect[0][i + BUFFER_SIZE + 1] = '\0';
+	printf("lect alloc: %s\n", *lect);
 	return (0);
 }
 

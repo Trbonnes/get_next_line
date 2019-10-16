@@ -11,19 +11,19 @@ int	main(int ac, char **av)
 {
 	int fd;
 	int re;
-	char **line;
+	char *line;
 
 	(void)ac;
-	line = NULL;
+	line = 0;
 	fd = open(av[1], O_RDONLY);
 	printf("fd : %d\n", fd);
-	re = get_next_line(fd, line);
+	re = get_next_line(fd, &line);
 	printf("valeur de retour : %d\n", re);
-	printf("%s\n\n", line[0]);
-	re = get_next_line(fd, line);
-	printf("valeur de retour : %d\n", re);
-	printf("%s\n\n", line[0]);
-	re = get_next_line(fd, line);
-	printf("valeur de retour : %d\n", re);
-	printf("%s\n\n", line[0]);
+	printf("%s\n\n", line);
+//	re = get_next_line(fd, &line);
+//	printf("valeur de retour : %d\n", re);
+//	printf("%s\n\n", line);
+//	re = get_next_line(fd, &line);
+//	printf("valeur de retour : %d\n", re);
+//	printf("%s\n\n", line);
 }
