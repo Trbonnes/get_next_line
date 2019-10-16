@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 11:53:22 by trbonnes          #+#    #+#             */
-/*   Updated: 2019/10/16 09:45:01 by marvin           ###   ########.fr       */
+/*   Updated: 2019/10/16 10:45:47 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,10 @@ int		ft_bigone(char **buffer, char **save, char **lect, int nb_r)
 	{
 		if (ft_bigsave(save, lect) == 1)
 			return (1);
+		while (lect[0][j])
+				j++;
 		if (buffer[0][i] == '\0')
 		{
-			while (lect[0][j])
-				j++;
 			lect[0][j] = '\0';
 			return (0);
 		}
@@ -73,10 +73,12 @@ int		ft_littleone(char **buffer, char **save, char **lect, int fd)
 
 	nb_r = 1;
 	j = 0;
+	i = 0;
 	while (lect[0][j] != '\n')
 	{
+		while (save[0][i] && save[0][i] != '\n' && nb_r != 0)
+			lect[0][j++] = save[0][i++];
 		i = 0;
-		ft_littlesave(save, lect, nb_r);
 		while (buffer[0][i] && (buffer[0][i] != '\n' && nb_r != 0))
 			lect[0][j++] = buffer[0][i++];
 		if (buffer[0][i] == '\n' || nb_r == 0)
@@ -107,6 +109,7 @@ int		get_next_line(int fd, char **line)
 	nb_r = read(fd, buffer, BUFFER_SIZE);
 	if (ft_error(nb_r, buffer, save) == -1)
 		return (-1);
+	printf("buffline: %d\n", ft_buffline(buffer));
 	if (ft_buffline(buffer) == 1)
 	{
 		if (ft_bigone(&buffer, &save, &lect, nb_r) == 1)

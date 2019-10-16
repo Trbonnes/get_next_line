@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 12:11:47 by trbonnes          #+#    #+#             */
-/*   Updated: 2019/10/16 09:56:07 by marvin           ###   ########.fr       */
+/*   Updated: 2019/10/16 10:40:06 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,6 @@ int		ft_bigsave(char **save, char **lect)
 		}
 	}
 	return (0);
-}
-
-void	ft_littlesave(char **save, char **lect, int nb_r)
-{
-	int i;
-	int j;
-
-	i = 0;
-	j = 0;
-	while (save[0][i] && save[0][i] != '\n' && nb_r != 0)
-		lect[0][j++] = save[0][i++];
 }
 
 int		ft_littleread(char **buffer, char **save, int nb_r, int fd)

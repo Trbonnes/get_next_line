@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 11:52:01 by trbonnes          #+#    #+#             */
-/*   Updated: 2019/10/15 16:31:40 by trbonnes         ###   ########.fr       */
+/*   Updated: 2019/10/16 10:40:11 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int		ft_error(int nb_r, char *buffer, char *save);
 int		ft_bigone(char **buffer, char **save, char **lect, int nb_r);
 int		ft_littleone(char **buffer, char **save, char **lect, int fd);
 int		ft_bigsave(char **save, char **lect);
-void	ft_littlesave(char **save, char **lect, int nb_r);
 int		ft_littleread(char **buffer, char **save, int nb_r, int fd);
 
 #endif
