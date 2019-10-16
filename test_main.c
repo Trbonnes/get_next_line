@@ -15,6 +15,7 @@ int	main(int ac, char **av)
 
 	(void)ac;
 	line = malloc(10000);
+	*line = malloc(10000);
 	fd = open(av[1], O_RDONLY);
 	printf("fd : %d\n", fd);
 	re = get_next_line(fd, line);

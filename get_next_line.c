@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 11:53:22 by trbonnes          #+#    #+#             */
-/*   Updated: 2019/10/15 16:24:52 by trbonnes         ###   ########.fr       */
+/*   Updated: 2019/10/16 09:20:18 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,22 +40,24 @@ int		save_lock(char **save)
 
 int		ft_bigone(char **buffer, char **save, char **lect, int nb_r)
 {
-	while (**buffer != '\n')
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	while (buffer[0][i] != '\n')
 	{
 		if (ft_bigsave(save, lect) == 1)
 			return (1);
-		if (**buffer == '\0')
+		if (buffer[0][i] == '\0')
 		{
-			**lect = '\0';
+			lect[0][i] = '\0';
 			return (0);
 		}
-		**lect = **buffer;
-		(*lect)++;
-		(*buffer)++;
+		lect[0][j++] = buffer[0][i++];
 	}
-	*save = *buffer;
-	(*save)++;
-	**lect = '\0';
+	*save = *buffer + i + 1;
+	lect[0][j] = '\0';
 	if (nb_r == 0)
 		return (0);
 	return (1);
@@ -64,27 +66,25 @@ int		ft_bigone(char **buffer, char **save, char **lect, int nb_r)
 int		ft_littleone(char **buffer, char **save, char **lect, int fd)
 {
 	int i;
+	int j;
 	int nb_r;
 
 	nb_r = 1;
-	while (**lect != '\n')
+	j = 0;
+	while (lect[0][j] != '\n')
 	{
 		i = 0;
 		ft_littlesave(save, lect, nb_r);
-		while (((*buffer)[i]) && ((*buffer)[i]) != '\n' && nb_r != 0)
-		{
-			**lect = ((*buffer)[i++]);
-			(*lect)++;
-		}
-		if ((*buffer)[i] == '\n' || nb_r == 0)
-			**lect = '\n';
+		while (buffer[0][i] && (buffer[0][i] != '\n' && nb_r != 0))
+			lect[0][j++] = buffer[0][i++];
+		if (buffer[0][i] == '\n' || nb_r == 0)
+			lect[0][j] = '\n';
 		else if (nb_r != 0)
 			if ((nb_r = ft_littleread(buffer, save, nb_r, fd)) == -1)
 				return (-1);
 	}
-	*save = (*buffer) + i;
-	(*save)++;
-	**lect = '\0';
+	*save = *buffer + i + 1;
+	lect[0][j] = '\0';
 	if (nb_r == 0)
 		return (0);
 	return (1);
