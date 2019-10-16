@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 11:53:22 by trbonnes          #+#    #+#             */
-/*   Updated: 2019/10/16 09:20:18 by marvin           ###   ########.fr       */
+/*   Updated: 2019/10/16 09:45:01 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,9 @@ int		ft_bigone(char **buffer, char **save, char **lect, int nb_r)
 			return (1);
 		if (buffer[0][i] == '\0')
 		{
-			lect[0][i] = '\0';
+			while (lect[0][j])
+				j++;
+			lect[0][j] = '\0';
 			return (0);
 		}
 		lect[0][j++] = buffer[0][i++];
