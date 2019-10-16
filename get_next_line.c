@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 11:53:22 by trbonnes          #+#    #+#             */
-/*   Updated: 2019/10/16 16:43:24 by trbonnes         ###   ########.fr       */
+/*   Updated: 2019/10/16 17:21:58 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int		save_lock(char **save)
 {
 	if (!*save)
 	{
-		if (!(*save = malloc(BUFFER_SIZE)))
+		if (!(*save = malloc(BUFFER_SIZE + 1)))
 			return (-1);
 		**save = '\0';
 	}

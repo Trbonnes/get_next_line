@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 12:11:47 by trbonnes          #+#    #+#             */
-/*   Updated: 2019/10/16 16:43:23 by trbonnes         ###   ########.fr       */
+/*   Updated: 2019/10/16 17:18:11 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 int		ft_firstalloc(char **lect)
 {
 	printf("firstcall\n");
-	if (!(lect[0] = malloc(BUFFER_SIZE + 2)))
+	if (!(lect[0] = malloc(BUFFER_SIZE + 1)))
 		return (-1);
-	lect[0][BUFFER_SIZE + 1] = '\0';
+	lect[0][BUFFER_SIZE] = '\0';
 	printf("address: %p\n", lect);
 	return (0);
 }
@@ -40,12 +40,12 @@ int		ft_lectalloc(char **lect)
 		tmp[j] = (lect[0][j]);
 	tmp[++j] = '\0';
 	free(*lect);
-	if (!(lect[0] = malloc(i + BUFFER_SIZE + 2)))
+	if (!(lect[0] = malloc(i + BUFFER_SIZE + 1)))
 		return (-1);
 	j = -1;
 	while (tmp[++j] != '\0')
 		lect[0][j] = tmp[j];
-	lect[0][i + BUFFER_SIZE + 1] = '\0';
+	lect[0][i + BUFFER_SIZE] = '\0';
 	printf("lect alloc: %s\n", *lect);
 	return (0);
 }
