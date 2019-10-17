@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 10:44:38 by trbonnes          #+#    #+#             */
-/*   Updated: 2019/10/17 11:18:33 by trbonnes         ###   ########.fr       */
+/*   Updated: 2019/10/17 11:48:29 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,7 @@ void	ft_strcat(char **dest, char **src)
 	i = 0;
 	j = 0;
 	while (dest[0][i] != '\0')
-	{
 		i++;
-	}
 	while (src[0][j] != '\0')
 	{
 		dest[0][i + j] = src[0][j];
@@ -76,8 +74,7 @@ int		ft_realloc(char **str)
 	j = -1;
 	while (str[0][++j] != '\0')
 		tmp[j] = (str[0][j]);
-	tmp[++j] = '\0';
-	//free(str[0]);
+	tmp[j] = '\0';
 	if (!(str[0] = malloc(i + BUFFER_SIZE + 1)))
 		return (-1);
 	j = -1;
@@ -129,6 +126,7 @@ int		get_next_line(int fd, char **line)
 		if (ft_realloc(&save) == -1)
 			return (-1);
 		nb_r = read(fd, buffer, BUFFER_SIZE);
+		buffer[BUFFER_SIZE] = '\0';
 		ft_strcat(&save, &buffer);
 	}
 	if (ft_error(nb_r, buffer, save) == -1)
