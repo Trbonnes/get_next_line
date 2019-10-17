@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/14 11:52:01 by trbonnes          #+#    #+#             */
-/*   Updated: 2019/10/17 09:06:10 by trbonnes         ###   ########.fr       */
+/*   Created: 2019/10/17 10:46:43 by trbonnes          #+#    #+#             */
+/*   Updated: 2019/10/17 11:11:21 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,11 @@
 # endif
 
 int		get_next_line(int fd, char **line);
-int		save_lock(char **save);
-int		ft_buffline(char *buffer);
+int		ft_findandreturn(char **line, char **save);
+int		ft_realloc(char **str);
 int		ft_error(int nb_r, char *buffer, char *save);
-int		ft_bigone(char **buffer, char **save, char **lect, int nb_r);
-int		ft_littleone(char **buffer, char **save, char **lect, int fd);
-int		ft_bigsave(char **save, char **lect);
-int		ft_littleread(char **buffer, char **save, int nb_r, int fd);
+void	ft_strcat(char **dest, char **src);
 size_t	ft_strrlen(const char *s);
-int		ft_realloc(char **lect);
+size_t	ft_strlen(const char *s);
 
 #endif
