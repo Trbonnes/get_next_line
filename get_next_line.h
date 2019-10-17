@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 10:46:43 by trbonnes          #+#    #+#             */
-/*   Updated: 2019/10/17 11:11:21 by trbonnes         ###   ########.fr       */
+/*   Updated: 2019/10/17 12:14:55 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 int		get_next_line(int fd, char **line);
 int		ft_findandreturn(char **line, char **save);
 int		ft_realloc(char **str);
+int		ft_savelock(char **save);
 int		ft_error(int nb_r, char *buffer, char *save);
 void	ft_strcat(char **dest, char **src);
 size_t	ft_strrlen(const char *s);

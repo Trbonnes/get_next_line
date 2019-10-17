@@ -6,49 +6,11 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 10:44:38 by trbonnes          #+#    #+#             */
-/*   Updated: 2019/10/17 11:48:29 by trbonnes         ###   ########.fr       */
+/*   Updated: 2019/10/17 12:15:27 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
-
-size_t	ft_strlen(const char *s)
-{
-	size_t i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
-}
-
-size_t	ft_strrlen(const char *s)
-{
-	size_t i;
-
-	i = 0;
-	while (s[i] && s[i] != '\n')
-		i++;
-	return (i);
-}
-
-void	ft_strcat(char **dest, char **src)
-{
-	int i;
-	int j;
-
-	i = 0;
-	j = 0;
-	while (dest[0][i] != '\0')
-		i++;
-	while (src[0][j] != '\0')
-	{
-		dest[0][i + j] = src[0][j];
-		j++;
-	}
-	dest[0][i + j] = '\0';
-}
 
 int		ft_error(int nb_r, char *buffer, char *save)
 {
@@ -60,6 +22,17 @@ int		ft_error(int nb_r, char *buffer, char *save)
 		return (-1);
 	}
 	return (0);
+}
+
+int		ft_savelock(char **save)
+{
+	if (!*save)
+	{
+		if (!(*save = malloc(BUFFER_SIZE + 1)))
+			return (-1);
+		**save = '\0';
+	}
+	return (1);
 }
 
 int		ft_realloc(char **str)
@@ -107,27 +80,25 @@ int		ft_findandreturn(char **line, char **save)
 
 int		get_next_line(int fd, char **line)
 {
-	char *buffer;
+	char		*buffer;
 	static char *save;
-	int nb_r;
+	int			nb_r;
 
 	*line = 0;
 	nb_r = 1;
 	if (!(buffer = malloc(BUFFER_SIZE + 1)))
 		return (-1);
-	if (!save)
-	{
-		if (!(save = malloc(BUFFER_SIZE + 1)))
-			return (-1);
-		*save = '\0';
-	}
+	if (ft_savelock(&save) == -1)
+		return (-1);
+	nb_r = read(fd, buffer, BUFFER_SIZE);
+	buffer[BUFFER_SIZE] = '\0';
 	while (nb_r > 0)
 	{
 		if (ft_realloc(&save) == -1)
 			return (-1);
+		ft_strcat(&save, &buffer);
 		nb_r = read(fd, buffer, BUFFER_SIZE);
 		buffer[BUFFER_SIZE] = '\0';
-		ft_strcat(&save, &buffer);
 	}
 	if (ft_error(nb_r, buffer, save) == -1)
 		return (-1);
