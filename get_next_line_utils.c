@@ -6,40 +6,39 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 12:11:47 by trbonnes          #+#    #+#             */
-/*   Updated: 2019/10/16 17:18:11 by trbonnes         ###   ########.fr       */
+/*   Updated: 2019/10/17 09:46:07 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <stdio.h>
 
-int		ft_firstalloc(char **lect)
-{
-	printf("firstcall\n");
-	if (!(lect[0] = malloc(BUFFER_SIZE + 1)))
-		return (-1);
-	lect[0][BUFFER_SIZE] = '\0';
-	printf("address: %p\n", lect);
-	return (0);
-}
 
-int		ft_lectalloc(char **lect)
+size_t		ft_strrlen(const char *s)
 {
-	char	*tmp;
-	int		i;
-	int		j;
+	size_t i;
 
 	i = 0;
-	printf("recall\n");
-	while (lect[0][i] != '\0')
+	while (s[i] && s[i] != '\n')
 		i++;
+	return (i);
+}
+
+int		ft_realloc(char **lect)
+{
+	char	*tmp;
+	size_t	i;
+	size_t	j;
+
+	i = ft_strrlen(lect[0]);
+	printf("recall\n");
+	printf("%p\n", *lect);
 	if (!(tmp = malloc(i + 1)))
 		return (-1);
 	j = -1;
 	while (lect[0][++j] != '\0')
 		tmp[j] = (lect[0][j]);
 	tmp[++j] = '\0';
-	free(*lect);
 	if (!(lect[0] = malloc(i + BUFFER_SIZE + 1)))
 		return (-1);
 	j = -1;
@@ -78,9 +77,6 @@ int		ft_bigsave(char **save, char **lect)
 			lect[0][j] = '\0';
 			return (1);
 		}
-		if (lect[0][j] == '\0')
-			if (ft_lectalloc(lect) == -1)
-				return (-1);
 	}
 	return (0);
 }

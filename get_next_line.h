@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 11:52:01 by trbonnes          #+#    #+#             */
-/*   Updated: 2019/10/16 16:43:10 by trbonnes         ###   ########.fr       */
+/*   Updated: 2019/10/17 09:06:10 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int		ft_bigone(char **buffer, char **save, char **lect, int nb_r);
 int		ft_littleone(char **buffer, char **save, char **lect, int fd);
 int		ft_bigsave(char **save, char **lect);
 int		ft_littleread(char **buffer, char **save, int nb_r, int fd);
-int		ft_firstalloc(char **lect);
-int		ft_lectalloc(char **lect);
+size_t	ft_strrlen(const char *s);
+int		ft_realloc(char **lect);
 
 #endif
