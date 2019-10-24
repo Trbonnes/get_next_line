@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 10:44:38 by trbonnes          #+#    #+#             */
-/*   Updated: 2019/10/24 09:39:37 by trbonnes         ###   ########.fr       */
+/*   Updated: 2019/10/24 09:43:09 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,5 @@ int		get_next_line(int fd, char **line)
 	}
 	if (ft_error(nb_r, buffer, save) == -1)
 		return (-1);
-	nb_r = ft_findandreturn(line, &save);
-	return (nb_r);
+	return (nb_r = ft_findandreturn(line, &save));
 }
