@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 10:44:38 by trbonnes          #+#    #+#             */
-/*   Updated: 2019/10/17 17:28:32 by trbonnes         ###   ########.fr       */
+/*   Updated: 2019/10/24 09:39:37 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ int		get_next_line(int fd, char **line)
 
 	*line = 0;
 	nb_r = 1;
+	if (fd < 0)
+		return (-1);
 	if (!(buffer = malloc(BUFFER_SIZE + 1)))
 		return (-1);
 	if (ft_savelock(&save) == -1)

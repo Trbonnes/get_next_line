@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 10:46:23 by trbonnes          #+#    #+#             */
-/*   Updated: 2019/10/17 12:15:25 by trbonnes         ###   ########.fr       */
+/*   Updated: 2019/10/24 09:38:58 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,18 @@ size_t	ft_strrlen(const char *s)
 	return (i);
 }
 
+void	ft_bzero(char **s, size_t n)
+{
+	char *ptr;
+
+	ptr = *s;
+	while (n > 0)
+	{
+		*ptr++ = 0;
+		n--;
+	}
+}
+
 void	ft_strcat(char **dest, char **src)
 {
 	int i;
@@ -47,4 +59,5 @@ void	ft_strcat(char **dest, char **src)
 		j++;
 	}
 	dest[0][i + j] = '\0';
+	ft_bzero(src, BUFFER_SIZE);
 }

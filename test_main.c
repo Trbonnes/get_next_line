@@ -46,4 +46,5 @@ int	main(int ac, char **av)
 	re = get_next_line(fd, &line);
 	printf("valeur de retour : %d\n", re);
 	printf("%s\n\n", line);
+	return (0);
 }
