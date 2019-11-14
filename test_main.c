@@ -38,13 +38,13 @@ int	main(int ac, char **av)
 	re = get_next_line(fd, &line);
 	printf("valeur de retour : %d\n", re);
 	printf("%s\n\n", line);
-	fd = open(av[2], O_RDONLY);
+	/*fd = open(av[2], O_RDONLY);
 	printf("fd : %d\n", fd);
 	re = get_next_line(fd, &line);
 	printf("valeur de retour : %d\n", re);
 	printf("%s\n\n", line);
 	re = get_next_line(fd, &line);
 	printf("valeur de retour : %d\n", re);
-	printf("%s\n\n", line);
+	printf("%s\n\n", line);*/
 	return (0);
 }
