@@ -6,11 +6,16 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 10:44:38 by trbonnes          #+#    #+#             */
-/*   Updated: 2019/10/24 09:43:09 by trbonnes         ###   ########.fr       */
+/*   Updated: 2019/11/14 12:08:47 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+int		ft_savefreereturn(char **buffer, char **save, int nb_r)
+{
+
+}
 
 int		ft_error(int nb_r, char *buffer, char *save)
 {
@@ -24,18 +29,7 @@ int		ft_error(int nb_r, char *buffer, char *save)
 	return (0);
 }
 
-int		ft_savelock(char **save)
-{
-	if (!*save)
-	{
-		if (!(*save = malloc(BUFFER_SIZE + 1)))
-			return (-1);
-		**save = '\0';
-	}
-	return (1);
-}
-
-int		ft_realloc(char **str)
+int		ft_realloc(char **str, int size)
 {
 	char	*tmp;
 	size_t	i;
@@ -48,38 +42,15 @@ int		ft_realloc(char **str)
 	while (str[0][++j] != '\0')
 		tmp[j] = (str[0][j]);
 	tmp[j] = '\0';
-	if (!(str[0] = malloc(i + BUFFER_SIZE + 1)))
+	free(str[0]);
+	if (!(str[0] = malloc(size + 1)))
 		return (-1);
 	j = -1;
 	while (tmp[++j] != '\0')
 		str[0][j] = tmp[j];
 	str[0][j] = '\0';
+	free(tmp);
 	return (0);
-}
-
-int		ft_findandreturn(char **line, char **save)
-{
-	int		i;
-	int		j;
-
-	i = 0;
-	j = 0;
-	if (!(line[0] = malloc(ft_strrlen(save[0]) + 1)))
-		return (-1);
-	while (save[0][i] != '\n' && save[0][i] != '\0')
-		line[0][j++] = save[0][i++];
-	line[0][j] = '\0';
-	if (save[0][i] == '\n')
-	{
-		*save = *save + i + 1;
-		return (1);
-	}
-	else
-	{
-		if (save[0] != NULL)
-			save[0] = NULL;
-		return (0);
-	}
 }
 
 int		get_next_line(int fd, char **line)
@@ -87,26 +58,38 @@ int		get_next_line(int fd, char **line)
 	char		*buffer;
 	static char *save;
 	int			nb_r;
+	int			i;
+	int			j;
 
-	*line = 0;
-	nb_r = 1;
+	if (*line)
+		free(*line);
+	i = 0;
+	j = 0;
 	if (fd < 0)
 		return (-1);
 	if (!(buffer = malloc(BUFFER_SIZE + 1)))
 		return (-1);
-	if (ft_savelock(&save) == -1)
+	if (!(*line = malloc(BUFFER_SIZE + 1)))
 		return (-1);
 	nb_r = read(fd, buffer, BUFFER_SIZE);
 	buffer[BUFFER_SIZE] = '\0';
-	while (nb_r > 0)
-	{
-		if (ft_realloc(&save) == -1)
-			return (-1);
-		ft_strcat(&save, &buffer);
-		nb_r = read(fd, buffer, BUFFER_SIZE);
-		buffer[BUFFER_SIZE] = '\0';
-	}
 	if (ft_error(nb_r, buffer, save) == -1)
-		return (-1);
-	return (nb_r = ft_findandreturn(line, &save));
+		return (ft_freeandreturn());
+	while (buffer[i] != '\n' && nb_r != 0)
+	{
+		line[j++] = buffer[i++];
+		if (buffer[i] == '\0')
+		{
+			ft_bzero(&buffer, BUFFER_SIZE);
+			nb_r = read(fd, buffer, BUFFER_SIZE);
+			if (ft_realloc(line, ft_strlen(*line) + BUFFER_SIZE) == -1 || ft_error(nb_r, buffer, save) == -1)
+				return (ft_freeandreturn());
+			i = 0;
+		}
+	}
+	i++;
+	if (ft_realloc(line, ft_strlen(*line)) == -1 )
+		return (ft_freeandreturn());
+	nb_r = ft_savefreereturn(&buffer, &save, nb_r);
+	return (nb_r);
 }
