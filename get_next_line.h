@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 10:46:43 by trbonnes          #+#    #+#             */
-/*   Updated: 2019/11/14 13:53:07 by trbonnes         ###   ########.fr       */
+/*   Updated: 2019/11/15 15:23:42 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,13 @@
 #  define BUFFER_SIZE 32
 # endif
 
-int		get_next_line(int fd, char **line);
-int		ft_realloc(char **str, int size);
+int		ft_savefreereturn(char **src, char **dst, int nb_r, int i);
 int		ft_error(int nb_r, char *buffer, char *save);
+int		ft_realloc(char **str, int size);
+int		get_next_line(int fd, char **line);
 size_t	ft_strlen(const char *s);
 void	ft_bzero(char **s, size_t n);
+void	ft_freepointer(char **ptr);
+int		ft_reread(char **buffer, char **save, char **line, int fd);
 
 #endif
