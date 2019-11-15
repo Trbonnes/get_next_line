@@ -17,6 +17,13 @@ int	main(int ac, char **av)
 	line = 0;
 	fd = open(av[1], O_RDONLY);
 	printf("fd : %d\n", fd);
+	re = 1;
+	/*while (re != 0)
+	{
+		re = get_next_line(fd, &line);
+		printf("valeur de retour : %d\n", re);
+		printf("%s\n\n", line);
+	}*/
 	re = get_next_line(fd, &line);
 	printf("valeur de retour : %d\n", re);
 	printf("%s\n\n", line);
@@ -46,5 +53,8 @@ int	main(int ac, char **av)
 	re = get_next_line(fd, &line);
 	printf("valeur de retour : %d\n", re);
 	printf("%s\n\n", line);*/
+
+	//while (1)
+	//	;
 	return (0);
 }
