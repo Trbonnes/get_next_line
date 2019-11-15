@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 10:44:38 by trbonnes          #+#    #+#             */
-/*   Updated: 2019/11/15 12:28:38 by trbonnes         ###   ########.fr       */
+/*   Updated: 2019/11/15 13:42:15 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int		ft_savefreereturn(char **src, char **dst, int nb_r, int i)
 	//printf("lolilol\n");
 	if (!(dst[0] = malloc(sizeof(char) * ft_strlen(src[0]) + 1)))
 		return (-1);
-	ft_bzero(dst, ft_strlen(src[0]));
+	ft_bzero(dst, ft_strlen(src[0]) + 1);
 	j = 0;
 	i = 0;
 	//printf("loli\n");
@@ -99,7 +99,7 @@ int		ft_realloc(char **str, int size)
 	str[0] = NULL;
 	if (!(str[0] = malloc(sizeof(char) * size + 1)))
 		return (-1);
-	ft_bzero(str, size);
+	ft_bzero(str, size + 1);
 	j = -1;
 	while (tmp[++j] != '\0')
 		str[0][j] = tmp[j];
@@ -124,7 +124,7 @@ int		get_next_line(int fd, char **line)
 	*line = NULL;
 	if (!(*line = malloc(BUFFER_SIZE + 1)))
 		return (-1);
-	ft_bzero(line, BUFFER_SIZE);
+	ft_bzero(line, BUFFER_SIZE + 1);
 	i = 0;
 	j = 0;
 	buffer = NULL;
@@ -140,7 +140,7 @@ int		get_next_line(int fd, char **line)
 	{
 		if (!(buffer = malloc(BUFFER_SIZE + 1)))
 			return (-1);
-		ft_bzero(&buffer, BUFFER_SIZE);
+		ft_bzero(&buffer, BUFFER_SIZE + 1);
 		nb_r = read(fd, buffer, BUFFER_SIZE);
 		if (ft_error(nb_r, buffer, save) == -1)
 			return (-1);
@@ -148,10 +148,8 @@ int		get_next_line(int fd, char **line)
 	while (buffer[i] != '\n' && nb_r != 0)
 	{
 		line[0][j++] = buffer[i++];
-		printf("i: \"%c\"\n", buffer[i]);
 		if (buffer[i] == '\0')
 		{
-			line[0][j] = '\0';
 			if (ft_strlen(buffer) != BUFFER_SIZE)
 			{
 				free(buffer);
@@ -159,7 +157,7 @@ int		get_next_line(int fd, char **line)
 				if (!(buffer = malloc(BUFFER_SIZE + 1)))
 					return (-1);
 			}
-			ft_bzero(&buffer, BUFFER_SIZE);
+			ft_bzero(&buffer, BUFFER_SIZE + 1);
 			nb_r = read(fd, buffer, BUFFER_SIZE);
 			if (ft_realloc(line, ft_strlen(line[0]) + BUFFER_SIZE) == -1 || ft_error(nb_r, buffer, save) == -1)
 				return (ft_error(nb_r, buffer, save));
