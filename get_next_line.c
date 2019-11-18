@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 10:44:38 by trbonnes          #+#    #+#             */
-/*   Updated: 2019/11/18 11:34:01 by trbonnes         ###   ########.fr       */
+/*   Updated: 2019/11/18 11:49:30 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,7 @@ int		ft_savefreereturn(char **src, char **dst, int nb_r, int i)
 		return (0);
 	}
 	if (src[0][0] == '\n' && src[0][i + 1] == '\0')
-	{
-		ft_freepointer(src);
-		return (1);
-	}
+		return (ft_freepointer(src));
 	if (i != 0 || (src[0][0] == '\n' && src[0][1] != '\0'))
 		src[0] = src[0] + i + 1;
 	ft_freepointer(dst);
@@ -40,8 +37,7 @@ int		ft_savefreereturn(char **src, char **dst, int nb_r, int i)
 	while (src[0][i])
 		dst[0][j++] = src[0][i++];
 	src[0] = add;
-	ft_freepointer(src);
-	return (1);
+	return (ft_freepointer(src));
 }
 
 int		ft_reread(char **buffer, char **save, char **line, int fd)

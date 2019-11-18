@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 10:46:43 by trbonnes          #+#    #+#             */
-/*   Updated: 2019/11/18 11:39:23 by trbonnes         ###   ########.fr       */
+/*   Updated: 2019/11/18 11:51:35 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int		ft_realloc(char **str, int size);
 int		get_next_line(int fd, char **line);
 size_t	ft_strlen(const char *s);
 void	ft_bzero(char **s, size_t n);
-void	ft_freepointer(char **ptr);
+int		ft_freepointer(char **ptr);
 int		ft_reread(char **buffer, char **save, char **line, int fd);
 int		ft_init(int fd, char **line);
 
