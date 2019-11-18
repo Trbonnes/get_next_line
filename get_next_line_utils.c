@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 10:46:23 by trbonnes          #+#    #+#             */
-/*   Updated: 2019/11/18 08:51:56 by trbonnes         ###   ########.fr       */
+/*   Updated: 2019/11/18 11:34:12 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int		ft_realloc(char **str, int size)
 	size_t	i;
 	size_t	j;
 
+	if (size <= 0)
+		return (0);
 	i = ft_strlen(str[0]);
 	if (!(tmp = malloc(sizeof(char) * i + 1)))
 		return (-1);

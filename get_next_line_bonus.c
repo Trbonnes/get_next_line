@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 10:44:38 by trbonnes          #+#    #+#             */
-/*   Updated: 2019/11/18 09:10:37 by trbonnes         ###   ########.fr       */
+/*   Updated: 2019/11/18 11:39:12 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@ int		ft_savefreereturn(char **src, char **dst, int nb_r, int i)
 		return (0);
 	}
 	if (src[0][0] == '\n' && src[0][i + 1] == '\0')
+	{
+		ft_freepointer(src);
 		return (1);
+	}
 	if (i != 0 || (src[0][0] == '\n' && src[0][1] != '\0'))
 		src[0] = src[0] + i + 1;
 	ft_freepointer(dst);
@@ -63,6 +66,11 @@ int		ft_firstread(char **buffer, char **save, int fd)
 {
 	int nb_r;
 
+	if (buffer[0])
+	{
+		free(buffer[0]);
+		buffer[0] = NULL;
+	}
 	if (!(buffer[0] = malloc(BUFFER_SIZE + 1)))
 		return (-1);
 	ft_bzero(buffer, BUFFER_SIZE + 1);
@@ -76,7 +84,7 @@ int		ft_init(int fd, char **line)
 {
 	if (fd < 0)
 		return (-1);
-	ft_freepointer(line);
+	*line = NULL;
 	if (!(*line = malloc(BUFFER_SIZE + 1)))
 		return (-1);
 	ft_bzero(line, BUFFER_SIZE + 1);
