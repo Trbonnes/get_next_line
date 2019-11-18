@@ -6,11 +6,36 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 10:46:23 by trbonnes          #+#    #+#             */
-/*   Updated: 2019/11/15 15:27:45 by trbonnes         ###   ########.fr       */
+/*   Updated: 2019/11/18 08:51:56 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+int		ft_realloc(char **str, int size)
+{
+	char	*tmp;
+	size_t	i;
+	size_t	j;
+
+	i = ft_strlen(str[0]);
+	if (!(tmp = malloc(sizeof(char) * i + 1)))
+		return (-1);
+	j = -1;
+	while (str[0][++j] != '\0')
+		tmp[j] = (str[0][j]);
+	tmp[j] = '\0';
+	ft_freepointer(str);
+	if (!(str[0] = malloc(sizeof(char) * size + 1)))
+		return (-1);
+	ft_bzero(str, size + 1);
+	j = -1;
+	while (tmp[++j] != '\0')
+		str[0][j] = tmp[j];
+	str[0][j] = '\0';
+	ft_freepointer(&tmp);
+	return (0);
+}
 
 size_t	ft_strlen(const char *s)
 {
