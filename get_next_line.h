@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 10:46:43 by trbonnes          #+#    #+#             */
-/*   Updated: 2019/11/19 13:14:58 by trbonnes         ###   ########.fr       */
+/*   Updated: 2019/11/19 14:45:19 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@
 # endif
 
 # ifdef BUFFER_SIZE
-# if BUFFER_SIZE < 0
-#  undef BUFFER_SIZE
-#  define BUFFER_SIZE  0
+#  if BUFFER_SIZE < 0
+#   undef BUFFER_SIZE
+#   define BUFFER_SIZE  0
 #  endif
 # endif
 
@@ -39,7 +39,6 @@ int		ft_strrchr(const char *s, int c);
 void	ft_bzero(char *s, size_t n);
 int		ft_error(int nb_r, t_buffer **lst);
 int		ft_lstsize(t_buffer *lst);
-int		ft_freepointer(char **ptr);
 t_buffer	*ft_lstnew();
 void	ft_lstclear(t_buffer **lst);
 

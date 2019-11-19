@@ -1,3 +1,27 @@
-29
-12
-1997
+
+int		get_next_line(int fd, char **line)
+{
+	static t_buffer *lst;
+	int nb_r;
+
+	nb_r = 2;
+	if (!line)
+		return (-1);
+	if (fd < 0)
+		return (-1);
+	if (BUFFER_SIZE <= 0)
+		return (-1);
+	*line = NULL;
+	while (nb_r != 1 && nb_r != 0)
+	{
+		if ((nb_r = ft_bufferadd(&lst, fd)) == -1)
+			return (-1);
+	}
+	if (!(line[0] = malloc(sizeof(char) * ft_lstsize(lst) * BUFFER_SIZE + 1)))
+		return (-1);
+	ft_bzero(line[0], ft_lstsize(lst) * BUFFER_SIZE + 1);
+	ft_fullup(line, &lst);
+	if ((nb_r = ft_saveandreturn(line, lst, nb_r)) == -1)
+		return (-1);
+	return (nb_r);
+}

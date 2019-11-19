@@ -6,13 +6,13 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 10:46:23 by trbonnes          #+#    #+#             */
-/*   Updated: 2019/11/19 11:15:29 by trbonnes         ###   ########.fr       */
+/*   Updated: 2019/11/19 14:53:53 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-t_buffer	*ft_lstnew()
+t_buffer	*ft_lstnew(void)
 {
 	t_buffer	*new;
 
@@ -26,17 +26,7 @@ t_buffer	*ft_lstnew()
 	return (new);
 }
 
-int		ft_freepointer(char **ptr)
-{
-	if (ptr[0])
-	{
-		free(ptr[0]);
-		ptr[0] = NULL;
-	}
-	return (1);
-}
-
-void	ft_bzero(char *s, size_t n)
+void		ft_bzero(char *s, size_t n)
 {
 	char *ptr;
 
@@ -48,7 +38,7 @@ void	ft_bzero(char *s, size_t n)
 	}
 }
 
-int	ft_strrchr(const char *s, int c)
+int			ft_strrchr(const char *s, int c)
 {
 	int end;
 
@@ -64,7 +54,7 @@ int	ft_strrchr(const char *s, int c)
 	return (0);
 }
 
-int	ft_lstsize(t_buffer *lst)
+int			ft_lstsize(t_buffer *lst)
 {
 	int i;
 
@@ -78,4 +68,21 @@ int	ft_lstsize(t_buffer *lst)
 		}
 	}
 	return (i);
+}
+
+void		ft_lstclear(t_buffer **lst)
+{
+	t_buffer *tmp;
+	t_buffer *supp;
+
+	if (lst == NULL)
+		return ;
+	tmp = *lst;
+	while (tmp != 0)
+	{
+		supp = tmp;
+		tmp = tmp->next;
+		free(supp);
+	}
+	lst = NULL;
 }
