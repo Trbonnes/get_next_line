@@ -6,59 +6,24 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 10:46:23 by trbonnes          #+#    #+#             */
-/*   Updated: 2019/11/18 11:48:51 by trbonnes         ###   ########.fr       */
+/*   Updated: 2019/11/19 11:15:29 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int		ft_realloc(char **str, int size)
+t_buffer	*ft_lstnew()
 {
-	char	*tmp;
-	size_t	i;
-	size_t	j;
+	t_buffer	*new;
 
-	if (size <= 0)
-		return (0);
-	i = ft_strlen(str[0]);
-	if (!(tmp = malloc(sizeof(char) * i + 1)))
-		return (-1);
-	j = -1;
-	while (str[0][++j] != '\0')
-		tmp[j] = (str[0][j]);
-	tmp[j] = '\0';
-	ft_freepointer(str);
-	if (!(str[0] = malloc(sizeof(char) * size + 1)))
-		return (-1);
-	ft_bzero(str, size + 1);
-	j = -1;
-	while (tmp[++j] != '\0')
-		str[0][j] = tmp[j];
-	str[0][j] = '\0';
-	ft_freepointer(&tmp);
-	return (0);
-}
-
-size_t	ft_strlen(const char *s)
-{
-	size_t i;
-
-	i = 0;
-	while (s[i] != '\0')
-		i++;
-	return (i);
-}
-
-void	ft_bzero(char **s, size_t n)
-{
-	char *ptr;
-
-	ptr = *s;
-	while (n > 0)
+	if ((new = malloc(sizeof(t_buffer))) == NULL)
+		return (NULL);
+	if (new)
 	{
-		*ptr++ = 0;
-		n--;
+		ft_bzero(new->buffer, BUFFER_SIZE + 1);
+		new->next = NULL;
 	}
+	return (new);
 }
 
 int		ft_freepointer(char **ptr)
@@ -71,21 +36,46 @@ int		ft_freepointer(char **ptr)
 	return (1);
 }
 
-int		ft_error(int nb_r, char *buffer, char *save)
+void	ft_bzero(char *s, size_t n)
 {
-	if (nb_r == -1)
+	char *ptr;
+
+	ptr = s;
+	while (n > 0)
 	{
-		if (buffer)
-		{
-			free(buffer);
-			buffer = NULL;
-		}
-		if (save)
-		{
-			free(save);
-			save = NULL;
-		}
-		return (-1);
+		*ptr++ = 0;
+		n--;
 	}
+}
+
+int	ft_strrchr(const char *s, int c)
+{
+	int end;
+
+	end = 0;
+	while (s[end])
+	{
+		if (s[end] == c)
+			return (1);
+		end++;
+	}
+	if (c == 0)
+		return (1);
 	return (0);
+}
+
+int	ft_lstsize(t_buffer *lst)
+{
+	int i;
+
+	i = 0;
+	if (lst != 0)
+	{
+		while (lst != 0)
+		{
+			i++;
+			lst = lst->next;
+		}
+	}
+	return (i);
 }

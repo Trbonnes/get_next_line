@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 10:46:43 by trbonnes          #+#    #+#             */
-/*   Updated: 2019/11/18 11:48:37 by trbonnes         ###   ########.fr       */
+/*   Updated: 2019/11/19 11:32:03 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,19 @@
 #  define BUFFER_SIZE 32
 # endif
 
+typedef	struct		s_buffer
+{
+	char			buffer[BUFFER_SIZE + 1];
+	struct s_buffer	*next;
+}					t_buffer;
+
 int		get_next_line(int fd, char **line);
-int		ft_savefreereturn(char **src, char **dst, int nb_r, int i);
-int		ft_error(int nb_r, char *buffer, char *save);
-int		ft_realloc(char **str, int size);
-int		get_next_line(int fd, char **line);
-size_t	ft_strlen(const char *s);
-void	ft_bzero(char **s, size_t n);
+int		ft_strrchr(const char *s, int c);
+void	ft_bzero(char *s, size_t n);
+int		ft_error(int nb_r, t_buffer **lst);
+int		ft_lstsize(t_buffer *lst);
 int		ft_freepointer(char **ptr);
-int		ft_reread(char **buffer, char **save, char **line, int fd);
-int		ft_init(int fd, char **line);
+t_buffer	*ft_lstnew();
+void	ft_lstclear(t_buffer **lst);
 
 #endif
