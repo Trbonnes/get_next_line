@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 10:46:43 by trbonnes          #+#    #+#             */
-/*   Updated: 2019/11/19 11:32:03 by trbonnes         ###   ########.fr       */
+/*   Updated: 2019/11/19 13:14:58 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,13 @@
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 32
+# endif
+
+# ifdef BUFFER_SIZE
+# if BUFFER_SIZE < 0
+#  undef BUFFER_SIZE
+#  define BUFFER_SIZE  0
+#  endif
 # endif
 
 typedef	struct		s_buffer

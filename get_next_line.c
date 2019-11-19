@@ -6,22 +6,11 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 10:44:38 by trbonnes          #+#    #+#             */
-/*   Updated: 2019/11/19 12:27:02 by trbonnes         ###   ########.fr       */
+/*   Updated: 2019/11/19 13:05:57 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-int		ft_error(int nb_r, t_buffer **lst)
-{
-	if (nb_r == -1)
-	{
-		ft_lstclear(lst);
-		return (-1);
-	}
-	return (0);
-}
-
 
 void	ft_lstclear(t_buffer **lst)
 {

@@ -14,7 +14,7 @@ int	main(int ac, char **av)
 	char *line;
 
 	(void)ac;
-	line = "Bonjour";
+	line = NULL;
 	fd = open(av[1], O_RDONLY);
 	printf("fd : %d\n", fd);
 	re = 1;
