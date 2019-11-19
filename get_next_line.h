@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 10:46:43 by trbonnes          #+#    #+#             */
-/*   Updated: 2019/11/19 14:45:19 by trbonnes         ###   ########.fr       */
+/*   Updated: 2019/11/19 14:58:35 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,15 @@ typedef	struct		s_buffer
 	struct s_buffer	*next;
 }					t_buffer;
 
-int		get_next_line(int fd, char **line);
-int		ft_strrchr(const char *s, int c);
-void	ft_bzero(char *s, size_t n);
-int		ft_error(int nb_r, t_buffer **lst);
-int		ft_lstsize(t_buffer *lst);
-t_buffer	*ft_lstnew();
-void	ft_lstclear(t_buffer **lst);
+int			ft_realloc(char **str, int size);
+int			ft_saveandreturn(char **line, t_buffer *lst, int nb_r);
+void		ft_fullup(char **line, t_buffer **lst);
+int			ft_bufferadd(t_buffer **lst, int fd);
+int			get_next_line(int fd, char **line);
+t_buffer	*ft_lstnew(void);
+void		ft_bzero(char *s, size_t n);
+int			ft_strrchr(const char *s, int c);
+int			ft_lstsize(t_buffer *lst);
+void		ft_lstclear(t_buffer **lst);
 
 #endif
