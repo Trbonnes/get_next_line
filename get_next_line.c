@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 10:44:38 by trbonnes          #+#    #+#             */
-/*   Updated: 2019/11/20 15:47:03 by trbonnes         ###   ########.fr       */
+/*   Updated: 2019/11/20 15:52:57 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,8 @@ int		ft_bufferadd(t_buffer **lst, int fd)
 
 	if (*lst && ft_strrchr((*lst)->buffer, '\n'))
 		return (1);
-	new = ft_lstnew();
+	if ((new = ft_lstnew()) == NULL)
+		return (-1);
 	if ((nb_r = read(fd, new->buffer, BUFFER_SIZE)) == -1)
 		return (-1);
 	new->next = NULL;
