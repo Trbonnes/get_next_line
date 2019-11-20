@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 10:46:43 by trbonnes          #+#    #+#             */
-/*   Updated: 2019/11/19 15:24:42 by trbonnes         ###   ########.fr       */
+/*   Updated: 2019/11/20 15:44:37 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,6 @@ t_buffer			*ft_lstnew(void);
 void				ft_bzero(char *s, size_t n);
 int					ft_strrchr(const char *s, int c);
 int					ft_lstsize(t_buffer *lst);
-void				ft_lstclear(t_buffer **lst);
+int					ft_lstclear(t_buffer **lst, int nb_r);
 
 #endif

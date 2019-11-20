@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 10:46:23 by trbonnes          #+#    #+#             */
-/*   Updated: 2019/11/19 14:53:53 by trbonnes         ###   ########.fr       */
+/*   Updated: 2019/11/20 15:47:57 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,19 +70,21 @@ int			ft_lstsize(t_buffer *lst)
 	return (i);
 }
 
-void		ft_lstclear(t_buffer **lst)
+int			ft_lstclear(t_buffer **lst, int nb_r)
 {
 	t_buffer *tmp;
 	t_buffer *supp;
 
 	if (lst == NULL)
-		return ;
+		return (nb_r);
 	tmp = *lst;
 	while (tmp != 0)
 	{
 		supp = tmp;
 		tmp = tmp->next;
-		free(supp);
+		if (supp)
+			free(supp);
 	}
 	lst = NULL;
+	return(nb_r);
 }

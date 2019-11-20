@@ -56,7 +56,7 @@ int	main(int ac, char **av)
 	printf("valeur de retour : %d\n", re);
 	printf("%s\n\n", line);*/
 
-	while (1)
-		;
+	//while (1)
+	//	;
 	return (0);
 }

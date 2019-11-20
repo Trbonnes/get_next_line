@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 10:44:38 by trbonnes          #+#    #+#             */
-/*   Updated: 2019/11/19 15:15:55 by trbonnes         ###   ########.fr       */
+/*   Updated: 2019/11/20 15:47:03 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,14 @@ int		ft_saveandreturn(char **line, t_buffer *lst, int nb_r)
 		k++;
 	}
 	ft_bzero(lst->buffer, BUFFER_SIZE + 1);
-	ft_lstclear(&(lst->next));
+	ft_lstclear(&(lst->next), 1);
 	lst->next = NULL;
 	while (line[0][i++])
 		lst->buffer[j++] = line[0][i];
 	if (ft_realloc(line, k) == -1)
 		return (-1);
 	if (lst->buffer[0] == '\0' && nb_r == 0)
-		return (0);
+		return (ft_lstclear(&lst, 0));
 	else
 		return (1);
 }
@@ -129,13 +129,13 @@ int		get_next_line(int fd, char **line)
 	while (nb_r != 1 && nb_r != 0)
 	{
 		if ((nb_r = ft_bufferadd(&lst, fd)) == -1)
-			return (-1);
+			return (ft_lstclear(&lst, -1));
 	}
 	if (!(line[0] = malloc(sizeof(char) * ft_lstsize(lst) * BUFFER_SIZE + 1)))
-		return (-1);
+		return (ft_lstclear(&lst, -1));
 	ft_bzero(line[0], ft_lstsize(lst) * BUFFER_SIZE + 1);
 	ft_fullup(line, &lst);
 	if ((nb_r = ft_saveandreturn(line, lst, nb_r)) == -1)
-		return (-1);
+		return (ft_lstclear(&lst, -1));
 	return (nb_r);
 }
