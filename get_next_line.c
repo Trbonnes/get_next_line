@@ -6,11 +6,12 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 10:44:38 by trbonnes          #+#    #+#             */
-/*   Updated: 2019/11/20 15:52:57 by trbonnes         ###   ########.fr       */
+/*   Updated: 2019/11/20 16:40:39 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <stdio.h>
 
 int		ft_realloc(char **str, int size)
 {
@@ -63,7 +64,7 @@ int		ft_saveandreturn(char **line, t_buffer *lst, int nb_r)
 	if (ft_realloc(line, k) == -1)
 		return (-1);
 	if (lst->buffer[0] == '\0' && nb_r == 0)
-		return (ft_lstclear(&lst, 0));
+		return (0);
 	else
 		return (1);
 }
@@ -94,9 +95,9 @@ int		ft_bufferadd(t_buffer **lst, int fd)
 	if (*lst && ft_strrchr((*lst)->buffer, '\n'))
 		return (1);
 	if ((new = ft_lstnew()) == NULL)
-		return (-1);
+		return (ft_lstclear(lst, -1));
 	if ((nb_r = read(fd, new->buffer, BUFFER_SIZE)) == -1)
-		return (-1);
+		return (ft_lstclear(&new, -1));
 	new->next = NULL;
 	if (lst == NULL)
 		return (-1);
@@ -130,7 +131,7 @@ int		get_next_line(int fd, char **line)
 	while (nb_r != 1 && nb_r != 0)
 	{
 		if ((nb_r = ft_bufferadd(&lst, fd)) == -1)
-			return (ft_lstclear(&lst, -1));
+			return (-1);
 	}
 	if (!(line[0] = malloc(sizeof(char) * ft_lstsize(lst) * BUFFER_SIZE + 1)))
 		return (ft_lstclear(&lst, -1));

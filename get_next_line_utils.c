@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 10:46:23 by trbonnes          #+#    #+#             */
-/*   Updated: 2019/11/20 15:54:21 by trbonnes         ###   ########.fr       */
+/*   Updated: 2019/11/20 16:00:15 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,15 +75,14 @@ int			ft_lstclear(t_buffer **lst, int nb_r)
 	t_buffer *tmp;
 	t_buffer *supp;
 
-	if (lst == NULL)
+	if (lst == NULL || *lst == NULL)
 		return (nb_r);
 	tmp = *lst;
 	while (tmp != 0)
 	{
 		supp = tmp;
 		tmp = tmp->next;
-		if (supp)
-			free(supp);
+		free(supp);
 	}
 	lst = NULL;
 	return (nb_r);
