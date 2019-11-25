@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 10:44:38 by trbonnes          #+#    #+#             */
-/*   Updated: 2019/11/20 16:40:39 by trbonnes         ###   ########.fr       */
+/*   Updated: 2019/11/25 14:43:56 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ int		ft_realloc(char **str, int size)
 		size = 1;
 	if (!(tmp = malloc(sizeof(char) * size + 1)))
 		return (-1);
+	ft_bzero(tmp, size + 1);
 	j = -1;
 	while (str[0][++j] && str[0][j] != '\n')
 		tmp[j] = (str[0][j]);
-	tmp[j] = '\0';
 	if (str[0])
 		free(str[0]);
 	if (!(str[0] = malloc(sizeof(char) * size + 1)))
@@ -64,9 +64,11 @@ int		ft_saveandreturn(char **line, t_buffer *lst, int nb_r)
 	if (ft_realloc(line, k) == -1)
 		return (-1);
 	if (lst->buffer[0] == '\0' && nb_r == 0)
+	{
+		lst = NULL;
 		return (0);
-	else
-		return (1);
+	}
+	return (1);
 }
 
 void	ft_fullup(char **line, t_buffer **lst)
@@ -77,7 +79,7 @@ void	ft_fullup(char **line, t_buffer **lst)
 
 	j = 0;
 	tmp = *lst;
-	while (tmp)
+	while (tmp != NULL)
 	{
 		i = 0;
 		while (tmp->buffer[i])
@@ -133,7 +135,7 @@ int		get_next_line(int fd, char **line)
 		if ((nb_r = ft_bufferadd(&lst, fd)) == -1)
 			return (-1);
 	}
-	if (!(line[0] = malloc(sizeof(char) * ft_lstsize(lst) * BUFFER_SIZE + 1)))
+	if (!(line[0] = malloc(sizeof(char) * (ft_lstsize(lst) * BUFFER_SIZE) + 1)))
 		return (ft_lstclear(&lst, -1));
 	ft_bzero(line[0], ft_lstsize(lst) * BUFFER_SIZE + 1);
 	ft_fullup(line, &lst);
