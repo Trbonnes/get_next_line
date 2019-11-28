@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 10:44:38 by trbonnes          #+#    #+#             */
-/*   Updated: 2019/11/28 09:52:33 by trbonnes         ###   ########.fr       */
+/*   Updated: 2019/11/28 09:55:25 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int		ft_eol(char *str, int size)
 		return (-1);
 	i = -1;
 	while (++i < size)
-		if (str[i] = '\n')
+		if (str[i] == '\n')
 			return (i);
 	return (-1);
 }

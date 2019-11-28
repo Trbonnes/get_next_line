@@ -42,12 +42,12 @@ int	main(int ac, char **av)
 	{
 		re = get_next_line(fd, &line);
 		//system("leaks a.out");
-		//ft_putendl_fd("valeur de retour : ", 1);
-		//printf("%d\n", re);
+		ft_putendl_fd("valeur de retour : ", 1);
+		printf("%d\n", re);
 		//printf("%s\n", line);
 		ft_putendl_fd(line, 1);
 		free(line);
-		//system("leaks a.out");
+		system("leaks a.out");
 	}
 	re = get_next_line(fd, &line);
 	//system("leaks a.out");
@@ -105,7 +105,7 @@ int	main(int ac, char **av)
 	ft_putendl_fd(line, 1);
 	free(line);
 	//system("leaks a.out");
-	fd = open(av[2], O_RDONLY);
+	/*fd = open(av[2], O_RDONLY);
 	//printf("fd : %d\n", fd);
 	re = get_next_line(fd, &line);
 	//system("leaks a.out");
@@ -130,7 +130,7 @@ int	main(int ac, char **av)
 	//printf("%s\n", line);
 	ft_putendl_fd(line, 1);
 	free(line);
-	//system("leaks a.out");
+	//system("leaks a.out");*/
 
 	while (1)
 		;
