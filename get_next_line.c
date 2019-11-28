@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 10:44:38 by trbonnes          #+#    #+#             */
-/*   Updated: 2019/11/28 09:55:25 by trbonnes         ###   ########.fr       */
+/*   Updated: 2019/11/28 10:45:26 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int		get_next_line(int fd, char **line)
 	char			*buffer;
 	int				i;
 
-	if (BUFFER_SIZE < 0 || !line || fd < 0 || !(current = ft_lst_fd(fd, &lst)))
+	if (BUFFER_SIZE <= 0 || !line || fd < 0 || !(current = ft_lst_fd(fd, &lst)))
 		return (-1);
 	*line = 0;
 	s_line = (t_line) {.size = 0, .line = line};

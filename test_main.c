@@ -47,7 +47,7 @@ int	main(int ac, char **av)
 		//printf("%s\n", line);
 		ft_putendl_fd(line, 1);
 		free(line);
-		system("leaks a.out");
+		//system("leaks a.out");
 	}
 	re = get_next_line(fd, &line);
 	//system("leaks a.out");
