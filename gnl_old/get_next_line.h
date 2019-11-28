@@ -6,7 +6,7 @@
 /*   By: trbonnes <trbonnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 10:46:43 by trbonnes          #+#    #+#             */
-/*   Updated: 2019/11/28 09:50:57 by trbonnes         ###   ########.fr       */
+/*   Updated: 2019/11/25 11:51:41 by trbonnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,31 +21,28 @@
 #  define BUFFER_SIZE 32
 # endif
 
-typedef struct		s_list
-{
-	int				fd;
-	char			*left;
-	int				size;
-	struct s_list	*next;
-}					t_list;
+# ifdef BUFFER_SIZE
+#  if BUFFER_SIZE < 0
+#   undef BUFFER_SIZE
+#   define BUFFER_SIZE  0
+#  endif
+# endif
 
-typedef struct		s_line
+typedef	struct		s_buffer
 {
-	char			**line;
-	int				size;
-}					t_line;
+	char			buffer[BUFFER_SIZE + 1];
+	struct s_buffer	*next;
+}					t_buffer;
 
-char				*ft_memjoin(char const *s1, int size1,
-char const *s2, int size2);
-char				*ft_substr(char const *s, unsigned int start, size_t len);
-t_list				*ft_lstnew(int fd);
-t_list				*ft_lst_fd(int fd, t_list **lst);
-void				ft_lst_remove(int fd, t_list **lst);
-int					ft_eol(char *str, int size);
-int					ft_leftover(t_list *lst, t_line *s_line);
-int					ft_alloc(t_line *s_line, char *buffer, int cpysize);
-int					ft_reading(int fd, char *buffer,
-t_line *s_line, t_list *current);
+int					ft_realloc(char **str, int size);
+int					ft_saveandreturn(char **line, t_buffer *lst, int nb_r);
+void				ft_fullup(char **line, t_buffer **lst);
+int					ft_bufferadd(t_buffer **lst, int fd);
 int					get_next_line(int fd, char **line);
+t_buffer			*ft_lstnew(void);
+void				ft_bzero(char *s, size_t n);
+int					ft_strrchr(const char *s, int c);
+int					ft_lstsize(t_buffer *lst);
+int					ft_lstclear(t_buffer **lst, int nb_r);
 
 #endif
